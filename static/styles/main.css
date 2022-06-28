@@ -113,6 +113,12 @@ body {
     border-radius: 20px;
 }
 
+.contact--form {
+    display: block;
+    max-width: 600px;
+    margin: 0 auto;
+
+}
 
 @media (max-width:900px) {
     .hero--content--intro {
