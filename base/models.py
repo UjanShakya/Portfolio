@@ -21,6 +21,16 @@ class Project(models.Model):
         return self.title
 
 
+class Comment(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    created = models.DateTimeField(null=True, auto_now_add=True)
+    body = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.body[0:50]
+
+
 class Skill(models.Model):
 
     title = models.CharField(max_length=200)
@@ -66,3 +76,13 @@ class Message(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Endorsement(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    body = models.TextField()
+    approved = models.BooleanField(default=False, null=True)
+    featured = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.body[0:50]

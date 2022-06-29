@@ -1,7 +1,7 @@
 from dataclasses import field
 from pyexpat import model
 from django.forms import ModelForm
-from .models import Project, Message
+from .models import Project, Message, Skill, Endorsement, Comment
 
 
 class ProjectForm(ModelForm):
@@ -34,6 +34,53 @@ class MessageForm(ModelForm):
             {'class': 'form-control'}
         )
         self.fields['subject'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+        self.fields['body'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+
+
+class SkillForm(ModelForm):
+    class Meta:
+        model = Skill
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super(SkillForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+        self.fields['body'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+
+
+class EndorsementForm(ModelForm):
+    class Meta:
+        model = Endorsement
+        fields = '__all__'
+        exclude = ['approved']
+
+    def __init__(self, *args, **kwargs):
+        super(EndorsementForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+        self.fields['body'].widget.attrs.update(
+            {'class': 'form-control'}
+        )
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        exclude = ['project']
+
+    def __init__(self, *args, **kwargs):
+        super(CommentForm, self).__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update(
             {'class': 'form-control'}
         )
         self.fields['body'].widget.attrs.update(
