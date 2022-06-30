@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 import uuid
 from ckeditor_uploader.fields import RichTextUploadingField
@@ -35,6 +36,7 @@ class Skill(models.Model):
 
     title = models.CharField(max_length=200)
     body = models.TextField(null=True, blank=True)
+    logo = models.ImageField(null=True, default='cs.webp')
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(
         primary_key=True,

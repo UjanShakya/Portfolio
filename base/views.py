@@ -11,15 +11,21 @@ def homePage(request):
     detailedskills = Skill.objects.exclude(body='')
     skills = Skill.objects.filter(body='')
     endorsements = Endorsement.objects.filter(approved=True)
+
+    context = {"projects": projects, "skills": skills,
+               "detailedskills": detailedskills, 'endorsements': endorsements}
+    return render(request, 'base/home.html', context)
+
+
+def contactPage(request):
     form = MessageForm()
-    if request.method == "POST":
+    if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Your message was successfully sent!.')
-    context = {"projects": projects, "skills": skills,
-               "detailedskills": detailedskills, 'form': form, 'endorsements': endorsements}
-    return render(request, 'base/home.html', context)
+            messages.success(request, 'Your Message was successfully sent!.')
+    context = {'form': form}
+    return render(request, 'base/contact.html', context)
 
 
 def projectPage(request, pk):
